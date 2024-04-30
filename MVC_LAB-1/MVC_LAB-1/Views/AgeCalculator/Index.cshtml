@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Age Calculator";
+}
+
+<h1 class="display-6" style="font-weight:400">Age Calculator</h1>
+<form asp-controller="AgeCalculator" asp-action="DetermineAgeAndDaysToBirthday" method="post">
+    <label for="BirthDate" style="width: 100px;">Date of birth:</label>
+    <input type="date" id="BirthDate" name="BirthDate" 
+        style="width: 130px; margin-top: 5px;" 
+        max="@DateTime.Now.AddYears(-1).ToString("yyyy-MM-dd")">
+    <br>
+    <label for="CurrentDate" style="width: 100px;">Current date:</label>
+    <input type="date" id="CurrentDate" name="CurrentDate" 
+        style="width: 130px; margin-top: 5px;" readonly>
+    <br>
+    <button type="submit" style="width: 235px; 
+        margin-top: 5px; margin-bottom: 10px;">Calculate</button>
+</form>
+
+@if (Model != null)
+{
+    if (Model.Age != 0)
+    {
+        <p>Date of your birth is @Model.BirthDate.ToString("dd-MM-yyyy"). 
+            Your age is @Model.Age years.</p>
+    }
+
+    if (Model.DaysToBirthday != 0)
+    {
+        <p>There are @Model.DaysToBirthday days until your next birthday.</p>
+    }
+}
+
+<script>
+    // Получение текущей даты
+    var currentDate = new Date().toISOString().slice(0, 10);
+    // Присвоение значения текущей даты в поле CurrentDate
+    document.getElementById("CurrentDate").value = currentDate;
+</script>

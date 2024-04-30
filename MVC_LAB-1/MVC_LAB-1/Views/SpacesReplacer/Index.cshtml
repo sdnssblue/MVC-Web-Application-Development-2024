@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Spaces Replacer";
+}
+
+<h1 class="display-6" style="font-weight:400">Spaces Replacer</h1>
+<form asp-controller="SpacesReplacer" asp-action="ReplaceSpaces" method="post">
+    <label for="Sentence">Enter a sentence:</label>
+    <br>
+    <textarea id="InputText" name="InputText" 
+        style="width: 450px; height: 150px; resize: none;"></textarea>
+    <br>
+    <button type="submit" style="width: 450px; 
+        margin-top: 5px; margin-bottom: 10px;">Replace Spaces</button>
+</form>
+
+@if (Model != null)
+{
+    <br>
+    <p>
+        Replaced Text:
+        <br>
+        <textarea id="ReplacedText" name="ReplacedText" 
+            style="width: 450px; height: 150px; resize: none;" 
+            readonly>@Model.ReplacedText</textarea>
+        <br>
+        <button onclick="copyToClipboard()" style="width: 450px; 
+            margin-top: 5px; margin-bottom: 10px;">Copy Text</button>
+    </p>
+}
+
+<script>
+    // Копирование данных в буфер обмена
+    function copyToClipboard() {
+        var copyText = document.getElementById("ReplacedText");
+        copyText.select();
+        document.execCommand("copy");
+        alert("Copied text: " + copyText.value);
+    }
+</script>
