@@ -7,9 +7,9 @@ namespace MVC_LAB_2.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly TaskModel _taskModel;
+        private readonly MainModel _taskModel;
 
-        public HomeController(ILogger<HomeController> logger, TaskModel taskModel)
+        public HomeController(ILogger<HomeController> logger, MainModel taskModel)
         {
             _logger = logger;
             _taskModel = taskModel;
@@ -17,7 +17,7 @@ namespace MVC_LAB_2.Controllers
 
         public IActionResult Index()
         {
-            var viewModel = new TaskModel
+            var viewModel = new MainModel
             {
                 Groups = _taskModel.Groups
             };
@@ -25,7 +25,7 @@ namespace MVC_LAB_2.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddStudent(TaskModel viewModel)
+        public IActionResult AddStudent(MainModel viewModel)
         {
             if (!ModelState.IsValid)
             {

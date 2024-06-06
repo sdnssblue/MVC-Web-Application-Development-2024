@@ -33,7 +33,7 @@ namespace MVC_LAB_2.Models
 
         [Required]
         [RegularExpression(@"^(\+7|8)?[\s-]?(\(?\d{3}\)?)[\s-]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})$",
-            ErrorMessage = "Номер телефона должен быть в формате +7 (999) 999-99-99.")]
+            ErrorMessage = "Номер телефона должен быть в следующем формате: 8 (999) 999-99-99.")]
         public string Phone
         {
             get => _phone!;

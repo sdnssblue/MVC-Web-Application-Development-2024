@@ -7,7 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
-builder.Services.AddSingleton<TaskModel>();
+builder.Services.AddSingleton<MainModel>();
 
 var app = builder.Build();
 
