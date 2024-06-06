@@ -1,0 +1,85 @@
+﻿@model MVC_LAB_2.Models.TaskModel;
+
+<form method="post" asp-action="AddStudent" id="studentForm" class="w-50 mx-auto m-3">
+    <div class="m-2">
+        <label asp-for="NewStudent.Surname" class="form-label">Фамилия*</label>
+        <input asp-for="NewStudent.Surname" class="form-control" type="text" required autocomplete="off">
+        <span asp-validation-for="NewStudent.Surname" class="text-danger"></span>
+    </div>
+
+    <div class="m-2">
+        <label asp-for="NewStudent.Name" class="form-label">Имя*</label>
+        <input asp-for="NewStudent.Name" class="form-control" type="text" required autocomplete="off">
+        <span asp-validation-for="NewStudent.Name" class="text-danger"></span>
+    </div>
+
+    <div class="m-2">
+        <label asp-for="NewStudent.Patronymic" class="form-label">Отчество</label>
+        <input asp-for="NewStudent.Patronymic" class="form-control" type="text" autocomplete="off">
+        <span asp-validation-for="NewStudent.Patronymic" class="text-danger"></span>
+    </div>
+
+    <div class="m-2">
+        <label asp-for="NewStudent.GroupName" class="form-label">Номер группы*</label>
+        <input asp-for="NewStudent.GroupName" class="form-control" type="text" required autocomplete="off">
+        <span asp-validation-for="NewStudent.GroupName" class="text-danger"></span>
+    </div>
+
+    <div class="m-2">
+        <label asp-for="NewStudent.Email" class="form-label">Электронная почта*</label>
+        <input asp-for="NewStudent.Email" class="form-control" type="email" required autocomplete="off">
+        <span asp-validation-for="NewStudent.Email" class="text-danger"></span>
+    </div>
+
+    <div class="m-2">
+        <label asp-for="NewStudent.Phone" class="form-label">Номер телефона*</label>
+        <input asp-for="NewStudent.Phone" class="form-control" type="tel" required autocomplete="off">
+        <span asp-validation-for="NewStudent.Phone" class="text-danger"></span>
+    </div>
+
+    <div class="m-3 d-flex justify-content-center">
+        <button class="btn btn-outline-primary my-2" type="submit">Добавить ученика</button>
+    </div>
+
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-success" role="alert">
+        @Model.Message
+    </div>
+}
+
+@if (Model.ShowGroups)
+{
+    <div class="mt-3">
+        <h2>Список групп</h2><br/>
+        @foreach (var group in Model.Groups)
+        {
+            <h3>Группа @group.Name:</h3>
+            <ul>
+                @foreach (var student in group.Students)
+                {
+                    <li>@student.Surname @student.Name @student.Patronymic<br/>
+                        @student.Email @student.Phone
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+}
+
+@if (Model.CurrentGroup.Students.Count > 0 && !Model.ShowGroups)
+{
+    <div class="mt-3">
+        <h3>Группа @Model.CurrentGroup.Name:</h3>
+        <ul>
+            @foreach (var student in Model.CurrentGroup.Students)
+            {
+                <li>@student.Surname @student.Name @student.Patronymic<br/>
+                    @student.Email @student.Phone
+                </li>
+            }
+        </ul>
+    </div>
+}
